@@ -9,7 +9,7 @@ export default function GoalInput({ onAddGoal }) {
   }
 
   function addGoalHandler() {
-    onAddGoal({ text: enteredGoal, id: Math.random().toString() });
+    onAddGoal(enteredGoal);
     setEnteredGoal("");
   }
 

@@ -1,4 +1,4 @@
-import { Button, FlatList, StyleSheet, TextInput, View } from "react-native";
+import { FlatList, StyleSheet, View } from "react-native";
 import { useState } from "react";
 import GoalItem from "./components/GoalItem";
 import GoalInput from "./components/GoalInput";
@@ -6,8 +6,11 @@ import GoalInput from "./components/GoalInput";
 export default function App() {
   const [courseGoals, setCourseGoals] = useState([]);
 
-  function addGoalHandler(payload) {
-    setCourseGoals((currentCourseGoals) => [...currentCourseGoals, payload]);
+  function addGoalHandler(newGoal) {
+    setCourseGoals((currentCourseGoals) => [
+      ...currentCourseGoals,
+      { text: newGoal, id: Math.random().toString() },
+    ]);
   }
 
   return (
