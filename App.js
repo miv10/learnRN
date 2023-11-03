@@ -1,5 +1,6 @@
 import {
   Button,
+  FlatList,
   ScrollView,
   StyleSheet,
   Text,
@@ -17,7 +18,10 @@ export default function App() {
   }
 
   function addGoalHandler() {
-    setCourseGoals((currentCourseGoals) => [...currentCourseGoals, enterdGoal]);
+    setCourseGoals((currentCourseGoals) => [
+      ...currentCourseGoals,
+      { text: enterdGoal, id: Math.random().toString() },
+    ]);
   }
 
   return (
@@ -31,13 +35,16 @@ export default function App() {
         <Button title="Add Goal" onPress={addGoalHandler} />
       </View>
       <View style={styles.goalsContainer}>
-        <ScrollView alwaysBounceVertical={false}>
-          {courseGoals.map((goal) => (
-            <View key={goal} style={styles.goalItemContainer}>
-              <Text style={styles.goalItemText}>{goal}</Text>
+        <FlatList
+          alwaysBounceVertical={false}
+          data={courseGoals}
+          keyExtractor={({ id }) => id}
+          renderItem={({ item: { text } }) => (
+            <View style={styles.goalItemContainer}>
+              <Text style={styles.goalItemText}>{text}</Text>
             </View>
-          ))}
-        </ScrollView>
+          )}
+        />
       </View>
     </View>
   );
@@ -66,7 +73,7 @@ const styles = StyleSheet.create({
     padding: 8,
   },
   goalsContainer: {
-    flex: 5,
+    flex: 8,
   },
   goalItemContainer: {
     margin: 8,
@@ -75,6 +82,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#5e0acc",
   },
   goalItemText: {
-    color: "white",
+    color: "#ffffff",
   },
 });
